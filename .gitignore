@@ -23,6 +23,4 @@ nbbuild/
 dist/
 nbdist/
 
-.aligenerator/
-bpmclasses/
 .flattened-pom.xml
