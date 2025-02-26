@@ -13,7 +13,13 @@ public class StrTest {
         // System.out.println(lengthOfLongestSubstring("dvdf"));
         // System.out.println(lengthOfLongestSubstring("abcabcbb"));
 
-        reverseStr("asfasf");
+//        reverseStr("asfasf");
+
+//        reverseStr2("asdfghjklz", 3);
+
+//        reverseStr2("as", 3);
+
+        reverseStr2("asdf", 3);
     }
     /**
      * 最长子串
@@ -83,11 +89,26 @@ public class StrTest {
         if (strArr.length < k) {
             swap(strArr, 0, strArr.length-1);
         }else if (strArr.length < 2 * k) {
-            
+            swap(strArr, 0, k-1);
+        }else {
+            // 超过2k
+            for (int i = 0; i < strArr.length; i += 2 * k) {
+                swap(strArr, i, i + k - 1);
+            }
         }
+        for (int i = 0; i < strArr.length; i++) {
+            System.out.print(strArr[i] + " ");
+        }
+        return strArr.toString();
     }
 
     static void swap(char[] strArr, int start, int end) {
-
+        while (start < end) {
+            char temp = strArr[start];
+            strArr[start] = strArr[end];
+            strArr[end] = temp;
+            start++;
+            end--;
+        }
     }
 }
