@@ -23,6 +23,14 @@ public class ArrayTest {
 //        for (int i : result) {
 //            System.out.print(i+ " ");
 //        }
+        // int[] nums = new int[]{1, 3, 2, 2, 4, 5, 1, 2};
+        // System.out.println(removeEle(nums, 2));
+
+        int[] nums1 = new int[]{-4,-1,0,3,10};
+        int[] res = numSquare(nums1);
+        for (int i = 0; i < res.length; i++) {
+            System.out.println(res[i]);
+        }
 
     }
 
@@ -116,7 +124,12 @@ public class ArrayTest {
         }
         return res;
     }
-
+    /**
+     * 在给定的一个字符串 S 中找到长度为 k 的子串，使得这个子串中的元音字母数量最多，并返回这个最大数量。
+     * @param S
+     * @param k
+     * @return
+     */
     static int maxVowels(String S, int k) {
         char[] s = S.toCharArray();
         // 返回的结果
@@ -142,7 +155,12 @@ public class ArrayTest {
         }
         return ans;
     }
-
+    /**
+     * 解决“接雨水”问题。这个问题通常出现在算法竞赛或者面试题中，它描述了一组高度不同的柱子排列成一行，
+     * 每根柱子宽度相同但高度不同。下雨后，这些柱子之间可以积聚一定量的水。目标是计算总共能积聚多少单位体积的水。
+     * @param height
+     * @return
+     */
     public static int trap(int[] height) {
         int sum = 0;
         Stack<Integer> stack = new Stack<>();
@@ -225,7 +243,7 @@ public class ArrayTest {
 
     /**
      * 基本的二分查找
-     * 查找目标值
+     * 查找目标值 [left, right]
      */
     static int binarySearch(int[] nums, int target) {
         int left = 0;
@@ -243,6 +261,13 @@ public class ArrayTest {
         }
         return -1;
     }
+    /**
+     * 你提供的代码是用来解决一个经典的二分查找问题，即在一个有序数组中查找目标值的第一个和最后一个出现的位置。
+     * 这个问题通常被称为“查找元素的范围”或“查找目标值的起始和结束索引”。
+     * @param nums
+     * @param target
+     * @return
+     */
     public int[] searchRange(int[] nums, int target) {
         // nums = [5,7,7,8,8,10], target = 8     3,4
         // nums = [5,7,7,8,8,10], target = 6
@@ -271,6 +296,59 @@ public class ArrayTest {
         return left;
     }
 
+    /**
+     * 给你一个数组 nums 和一个值 val，你需要 原地 移除所有数值等于 val 的元素，并返回移除后数组的新⻓度。 
+     * 不要使用额外的数组空间，你必须仅使用 O(1) 额外空间并原地修改输入数组。
+     * 元素的顺序可以改变。你不需要考虑数组中超出新⻓度后面的元素。
+        示例 1:
+        给定 nums = [3,2,2,3], val = 3,
+        函数应该返回新的⻓度 2, 并且 nums 中的前两个元素均为 2。 你不需要考虑数组中超出新⻓度后面的元素。
+        示例 2:
+        给定 nums = [0,1,2,2,3,0,4,2], val = 2,
+        函数应该返回新的⻓度 5, 并且 nums 中的前五个元素为 0, 1, 3, 0, 4。
+        你不需要考虑数组中超出新⻓度后面的元素。
+        思路比较简单：就是快慢指针
+     */
+        static int removeEle(int[] nums, int val) {
+            int slow = 0;
+            int fast = 0;
+            for (; fast < nums.length; fast++) {
+                if (nums[fast] != val) {
+                    nums[slow++] = nums[fast];
+                }
+            }
+            return slow;
+        }
 
+        /**
+         * 给你一个按 非递减顺序 排序的整数数组 nums，返回 每个数字的平方 组成的新数组，要求也按 非递减顺序 排 序。
+            示例 1:
+            输入:nums = [-4,-1,0,3,10]
+            输出:[0,1,9,16,100]
+            解释:平方后，数组变为 [16,1,0,9,100]，排序后，数组变为 [0,1,9,16,100]
+         */
+
+
+        static int[] numSquare(int[] nums) {
+            int[] resNums = new int[nums.length];
+            int left = 0;
+            int right = nums.length - 1;
+            int i = 0;
+            while (left <= right) {
+                if (left == right) {
+                    resNums[i++] = nums[left]; 
+                    break;   
+                }else {
+                    if (nums[left] * nums[left] > nums[right] * nums[right]) {
+                        resNums[i++] = nums[left] * nums[left];
+                        left++;
+                    }else {
+                        resNums[i++] = nums[right] * nums[right];
+                        right--;
+                    }
+                }
+            }
+            return resNums;
+        }
 
 }
